@@ -1,44 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Vòng Quay Siêu May Mắn</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <div class="spinBtn">Quay</div>
-        <div class="wheel">
-            <div class="number" style="--i:1;--clr:#2116b7;"><span>Nguyễn Văn Bẩy</span></div>
-            <div class="number" style="--i:2;--clr:#e55a94;"><span>Nguyễn Đức Đạt</span></div>
-            <div class="number" style="--i:3;--clr:#22dce9;"><span>Trần Minh Đức</span></div>
-            <div class="number" style="--i:4;--clr:#ee2828;"><span>Nguyễn Linh Hương</span></div>
-            <div class="number" style="--i:5;--clr:#9be12b;"><span>Bùi Quang Huy</span></div>
-            <div class="number" style="--i:6;--clr:#f567dd;"><span>Đặng Phương Linh</span></div>
-            <div class="number" style="--i:7;--clr:#259219;"><span>Trần Đình Thắng</span></div>
-            <div class="number" style="--i:8;--clr:#aa31e1;"><span>Lê Văn Thành</span></div>
-            <div class="number" style="--i:9;--clr:#e98e1e;"><span>Nguyễn Thị Thanh</span></div>
-            <div class="number" style="--i:10;--clr:#2261ce;"><span>Bùi Ngọc Thanh Thúy</span></div>
-            <div class="number" style="--i:11;--clr:#e7e432;"><span>Trần Văn Thắng</span></div>
-            <div class="number" style="--i:12;--clr:#e62a2a;"><span>Nguyễn Trọng Thành Nhân</span></div>
-            <div class="number" style="--i:13;--clr:#26d21d;"><span>Nguyễn Đức Anh Kiệt</span></div>
-            <div class="number" style="--i:14;--clr:#a1a494;"><span>Cô Thủy</span></div>
-        </div>
-        <div class="footer-text">Made by Thúy Bảnh</div>
-        <div class="kkk">Ấn đúp chuột 2 lần để tăng trải nghiệm.😉</div>
-    </div>
-    <script>
-        let wheel = document .querySelector('.wheel');
-        let spinBtn = document .querySelector('.spinBtn');
-        let value = Math.ceil(Math.random() * 3600);
+<script>
+    const wheel = document.querySelector('.wheel');
+    const spinBtn = document.querySelector('.spinBtn');
+    
+    // Mảng xác suất (phần trăm). Đảm bảo tổng cộng là 100.
+    const probabilities = [
+        { name: "Nguyễn Văn Bẩy", probability: 15 },
+        { name: "Nguyễn Đức Đạt", probability: 15 },
+        { name: "Trần Minh Đức", probability: 5 },
+        { name: "Nguyễn Linh Hương", probability: 20 },
+        { name: "Bùi Quang Huy", probability: 10 },
+        { name: "Đặng Phương Linh", probability: 10 },
+        { name: "Trần Đình Thắng", probability: 5 },
+        { name: "Lê Văn Thành", probability: 5 },
+        { name: "Nguyễn Thị Thanh", probability: 5 },
+        { name: "Bùi Ngọc Thanh Thúy", probability: 0 },
+        { name: "Trần Văn Thắng", probability: 5 },
+        { name: "Nguyễn Trọng Thành Nhân", probability: 5 },
+        { name: "Nguyễn Đức Anh Kiệt", probability: 5 },
+        { name: "Cô Thủy", probability: 5 }
+    ];
 
-        spinBtn.onclick = function(){
-            wheel.style.transform = "rotate(" + value + "deg)";
-            value += Math.ceil(Math.random() * 3600);
-        }
-    </script>
-</body>
-</html>
-<head>
-    <title>Vòng Quay Siêu May Mắn</title>
-    <link rel="doituyenhoa.html" type="text/css" href="style.css">
-</head>
+    // Chuyển đổi xác suất thành góc quay
+    const segments = [];
+    let cumulativeAngle = 0;
+    probabilities.forEach(({ name, probability }) => {
+        const angle = (probability / 100) * 360;
+        segments.push({ name, startAngle: cumulativeAngle, endAngle: cumulativeAngle + angle });
+        cumulativeAngle += angle;
+    });
+
+    function getWinner(degree) {
+        // Tìm người chiến thắng dựa trên góc quay
+        const normalizedDegree = degree % 360;
+        return segments.find(segment => 
+            normalizedDegree >= segment.startAngle && normalizedDegree < segment.endAngle
+        ).name;
+    }
+
+    spinBtn.onclick = function () {
+        const spinValue = Math.ceil(Math.random() * 3600); // Tổng số góc quay
+        const totalRotation = spinValue + Math.ceil(Math.random() * 360); // Xoay thêm một vòng ngẫu nhiên
+        const winner = getWinner(totalRotation);
+        console.log("Winner:", winner);
+
+        // Quay bánh xe
+        wheel.style.transition = "transform 5s ease-out";
+        wheel.style.transform = `rotate(${totalRotation}deg)`;
+    };
+            </script>
