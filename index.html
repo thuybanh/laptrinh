@@ -55,40 +55,15 @@
     </div>
 
     <script>
-    const wheel = document.querySelector('.wheel');
-        const spinBtn = document.querySelector('.spinBtn');
 
-        // Xác suất cho từng mục (tổng bằng 100)
-        const probabilities = [
-            { name: "Nguyễn Văn Bẩy", angle: 0, chance: 10 },
-            { name: "Nguyễn Đức Đạt", angle: 25.71, chance: 5 },
-            { name: "Trần Minh Đức", angle: 51.42, chance: 15 },
-            { name: "Nguyễn Linh Hương", angle: 77.13, chance: 10 },
-            { name: "Bùi Quang Huy", angle: 102.84, chance: 10 },
-            { name: "Đặng Phương Linh", angle: 128.55, chance: 5 },
-            { name: "Trần Đình Thắng", angle: 154.26, chance: 10 },
-            { name: "Lê Văn Thành", angle: 179.97, chance: 5 },
-            { name: "Nguyễn Thị Thanh", angle: 205.68, chance: 10 },
-            { name: "Bùi Ngọc Thanh Thúy", angle: 231.39, chance: 5 },
-            { name: "Trần Văn Thắng", angle: 257.1, chance: 5 },
-            { name: "Nguyễn Trọng Thành Nhân", angle: 282.81, chance: 5 },
-            { name: "Nguyễn Đức Anh Kiệt", angle: 308.52, chance: 5 },
-            { name: "Cô Thủy", angle: 334.23, chance: 5 }
-        ];
+        let wheel = document .querySelector('.wheel');
 
-        // Hàm tính ngẫu nhiên dựa trên xác suất
-        function getRandomAngle() {
-            const totalChance = probabilities.reduce((sum, item) => sum + item.chance, 0);
-            const random = Math.random() * totalChance;
+        let spinBtn = document .querySelector('.spinBtn');
 
-            let cumulativeChance = 0;
-            for (const item of probabilities) {
-                cumulativeChance += item.chance;
-                if (random <= cumulativeChance) {
-                    return item.angle;
-                }
-            }
-             }
+        let value = Math.ceil(Math.random() * 3600);
+
+
+
         spinBtn.onclick = function(){
 
             wheel.style.transform = "rotate(" + value + "deg)";
