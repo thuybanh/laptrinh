@@ -73,7 +73,7 @@ body
       background: var(--clr);
       transform-origin: bottom right;
       transform: rotate(calc(360deg / 10 * var(--i)));
-      clip-path: polygon(0 0, 42% 0, 100% 100%, 0 52%);
+      clip-path: polygon(0 0, 39% 0, 100% 100%, 0 52%);
       display: flex;
       justify-content: center;
       align-items: center;
