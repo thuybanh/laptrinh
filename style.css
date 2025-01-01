@@ -80,16 +80,15 @@ body
       user-select: none;
       cursor: pointer;
 }
-.container .wheel .number span
-{
-    position: relative;
-    top: 10%;
-    left: 10%;
-        transform: rotate(45deg);        
-        font-size: 1em;
-        font-weight: 600;
-        color: #fff;
-        text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.1);
+.container .wheel .number span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(calc(-360deg / 10 * var(--i)));
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.1);
 }
 .footer-text {
     position: fixed;
